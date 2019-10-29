@@ -5,20 +5,20 @@ using UnityEngine.Events;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private float JumpForce = 400f;
-    [Range(0, 1)] [SerializeField] private float CrouchSpeed = 0.36f;
+    [SerializeField] private float JumpForce = 400f;        // Player jump height
+    [Range(0, 1)] [SerializeField] private float CrouchSpeed = 0.36f;   // Player speed while crouched
     [Range(0, 0.3f)] [SerializeField] private float MovementSmoothing = 0.05f;
-    [SerializeField] private bool AirControl = false;
-    [SerializeField] private LayerMask WhatIsGround;
-    [SerializeField] private Transform GroundCheck;
-    [SerializeField] private Transform CeilingCheck;
-    [SerializeField] private Collider2D CrouchDisableCollider;
+    [SerializeField] private bool AirControl = false;   // Whether or not the player can control their character while jumping
+    [SerializeField] private LayerMask WhatIsGround;    // Layermask to find ground
+    [SerializeField] private Transform GroundCheck;     // Checking if ground present
+    [SerializeField] private Transform CeilingCheck;    // Checking if ceiling present
+    [SerializeField] private Collider2D CrouchDisableCollider;  // Collider to be disabled to allow crouching
 
-    const float GroundedRadius = .2f; // Radius of the overlap circle to determine if grounded
-    private bool Grounded;            // Whether or not the player is grounded.
-    const float CeilingRadius = .2f; // Radius of the overlap circle to determine if the player can stand up
-    private Rigidbody2D Rigidbody2D;
-    private bool FacingRight = true;  
+    const float GroundedRadius = .2f;           // Radius of the overlap circle to determine if grounded
+    private bool Grounded;                      // Whether or not the player is grounded.
+    const float CeilingRadius = .2f;            // Radius of the overlap circle to determine if the player can stand up
+    private Rigidbody2D Rigidbody2D;            
+    private bool FacingRight = true;            // Bool to keep track of which way the player is currently facing
     private Vector3 Velocity = Vector3.zero;
 
     [Header("Events")]
@@ -36,6 +36,7 @@ public class PlayerController : MonoBehaviour
     {
         Rigidbody2D = GetComponent<Rigidbody2D>();
 
+        // Initialize Events
         if (OnLandEvent == null)
             OnLandEvent = new UnityEvent();
 
