@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
 
     public PlayerController controller;
+    public Animator animator;
 
     public float runSpeed = 40f;
 
@@ -16,6 +17,8 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
+
+        animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
 
         if (Input.GetButtonDown("Jump"))
         {
@@ -30,6 +33,8 @@ public class PlayerMovement : MonoBehaviour
         {
             crouch = false;
         }
+
+        animator.SetBool("Crouch", crouch);
     }
 
     void FixedUpdate()
